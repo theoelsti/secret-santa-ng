@@ -12,7 +12,7 @@ model Member {
   name         String
   family       String
   lastSeen     DateTime
-  token        String
+  token        String         @unique
   isSantaFor   SantaRelation[] @relation("santa")
   receivingFrom SantaRelation[] @relation("receiver")
   gifts        Gift[]
