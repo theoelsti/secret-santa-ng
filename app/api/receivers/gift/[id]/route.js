@@ -1,19 +1,19 @@
 import { PrismaClient } from "@prisma/client";
 import { cookies } from "next/headers";
-
 const prisma = new PrismaClient();
 
 export async function GET(req, { params }) {
-  const token = cookies().get("token")?.value;
+  const u_cookies = await cookies();
+  const token = u_cookies.get("token")?.value;
 
   if (!token) {
-    return Response.json(
+    return NextResponse.json(
       { ok: false, message: "Token manquant" },
       { status: 401 }
     );
   }
 
-  const { id } = params;
+  const { id } = await params;
   const userId = parseInt(id);
 
   const sender = await prisma.member.findUnique({
