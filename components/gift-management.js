@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getCookie } from "@/lib/cookies";
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 export default function GiftManagement() {
   const [gifts, setGifts] = useState([]);
@@ -19,6 +20,7 @@ export default function GiftManagement() {
   const [credit, setCredit] = useState(null);
   const [totalGifts, setTotalGifts] = useState(0);
   const [message, setMessage] = useState(null);
+  const [sendingGift, setSendingGift] = useState(false);
 
   const getTotalGifts = async () => {
     try {
@@ -93,8 +95,10 @@ export default function GiftManagement() {
   }, []);
 
   const handleSubmitGift = async () => {
+    setSendingGift(true);
     if (!selectedMember || !newGift) {
       alert("Merci de séléctionner un nom et d'entrer un cadeau");
+      setSendingGift(false);
       return;
     }
 
@@ -132,7 +136,9 @@ export default function GiftManagement() {
         type: "destructive",
         text: "Une erreur est survenue lors de l'envoi du cadeau",
       });
+      setSendingGift(false);
     }
+    setSendingGift(false);
   };
 
   return (
@@ -197,8 +203,13 @@ export default function GiftManagement() {
           placeholder="Entre un cadeau"
           className="max-w-xs"
         />
-
-        <Button onClick={handleSubmitGift}>Envoyer</Button>
+        {sendingGift ? (
+          <Button disabled>
+            <Loader2 className="animate-spin" />
+          </Button>
+        ) : (
+          <Button onClick={handleSubmitGift}>Envoyer</Button>
+        )}
       </div>
     </div>
   );

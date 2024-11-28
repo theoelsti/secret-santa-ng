@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { getCookie } from "@/lib/cookies";
+import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
 export default function SantaInfo() {
   const [message, setMessage] = useState("");
   const router = useRouter();
@@ -56,11 +56,11 @@ export default function SantaInfo() {
       </div>
       <Button
         variant="destructive"
-        size="sm"
+        size="icon"
         onClick={logout}
         title="Déconnection"
       >
-        Déconnection
+        <LogOut />
       </Button>
     </div>
   );
