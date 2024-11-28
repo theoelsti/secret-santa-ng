@@ -7,6 +7,7 @@ export async function PUT(req) {
 
   const sender = await prisma.member.findUnique({
     where: { token },
+    include: { gifts: true },
   });
 
   if (!sender)
@@ -26,9 +27,12 @@ export async function PUT(req) {
     );
   }
 
-  if (sender.id === receiverId) {
+  if (sender.gifts.some((g) => g.proposerId === sender.id)) {
     return Response.json(
-      { ok: false, message: "Vous ne pouvez pas vous offrir un cadeau" },
+      {
+        ok: false,
+        message: "Vous avez déjà utilisé votre crédit pour proposer un cadeau",
+      },
       { status: 400 }
     );
   }
