@@ -28,7 +28,7 @@ export default function TokenInput() {
         const data = await res.json();
         document.cookie = `token=${token}`;
         document.cookie = `name=${data.santa}`;
-        document.cookie = `gift=${data.receiver[0]}`;
+        document.cookie = `gift=${data.receiver}`;
         document.cookie = `id=${data.receiver_id}`;
 
         router.push("/dashboard");
