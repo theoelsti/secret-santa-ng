@@ -27,11 +27,16 @@ export async function PUT(req) {
     );
   }
 
-  if (sender.gifts.some((g) => g.proposerId === sender.id)) {
+  if (
+    sender.gifts.some(
+      (g) => g.proposerId === sender.id && g.receiverId === sender.id
+    )
+  ) {
     return Response.json(
       {
         ok: false,
-        message: "Vous avez déjà utilisé votre crédit pour proposer un cadeau",
+        message:
+          "Vous avez déjà utilisé votre crédit pour proposer un cadeau pour vous-même.",
       },
       { status: 400 }
     );
