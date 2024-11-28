@@ -98,8 +98,8 @@ export default function SecretSantaForm() {
 
       {families.length === 0 ? (
         <p className="text-gray-600 text-center">
-          Pas encore de famille. Cliquez sur "Ajouter une famille" pour
-          commencer!
+          Pas encore de famille. Cliquez sur &quot;Ajouter une famille&quot;
+          pour commencer!
         </p>
       ) : (
         families.map((family, familyIndex) => (

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { getCookie } from "@/lib/cookies";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 export default function GiftManagement() {
   const [gifts, setGifts] = useState([]);
@@ -149,10 +150,12 @@ export default function GiftManagement() {
         {gifts.length === 0 ? (
           <div className="text-center">
             <p>Rien pour le moment 😒</p>
-            <img
+            <Image
               src="https://c.tenor.com/_BiwWBWhYucAAAAd/tenor.gif"
               alt="Confused John Travolta"
               className="w-1/3 mx-auto mt-4"
+              width={"20"}
+              height={"20"}
             />
           </div>
         ) : (

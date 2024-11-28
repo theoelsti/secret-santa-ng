@@ -13,22 +13,21 @@ export default function ManageExisting() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const res = await fetch("/api/admin/members");
+        if (res.ok) {
+          const data = await res.json();
+          const groupedMembers = groupByFamily(data.members);
+          setMembers(groupedMembers);
+        }
+      } catch (error) {
+        console.error("Failed to fetch members:", error);
+      }
+      setLoading(false);
+    };
     fetchMembers();
   }, []);
-
-  const fetchMembers = async () => {
-    try {
-      const res = await fetch("/api/admin/members");
-      if (res.ok) {
-        const data = await res.json();
-        const groupedMembers = groupByFamily(data.members);
-        setMembers(groupedMembers);
-      }
-    } catch (error) {
-      console.error("Failed to fetch members:", error);
-    }
-    setLoading(false);
-  };
 
   const groupByFamily = (members) => {
     return members.reduce((acc, member) => {

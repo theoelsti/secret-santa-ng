@@ -35,7 +35,7 @@ export default function SantaInfo() {
         </span>
       </p>
     );
-  }, []);
+  }, [router]);
 
   const isIOS = () => {
     return /iPad|iPhone|iPod/.test(navigator.userAgent);
