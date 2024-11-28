@@ -42,15 +42,50 @@ export default function ManageExisting() {
     await navigator.clipboard.writeText(message);
   };
 
-  if (loading) return <div>Chargement...</div>;
+  if (loading) {
+    // Skeleton loading state
+    return (
+      <div className="flex flex-col items-center space-y-6">
+        {[1, 2, 3].map((_, index) => (
+          <Card
+            key={index}
+            className="w-full max-w-2xl bg-white shadow-lg rounded-lg"
+          >
+            <CardHeader>
+              <div className="h-4 bg-gray-300 rounded-md w-1/3 animate-pulse"></div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {[1, 2, 3].map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex justify-between items-center p-2"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="h-4 w-20 bg-gray-300 rounded-md animate-pulse"></div>
+                      <div className="h-3 w-3 bg-gray-300 rounded-full animate-pulse"></div>
+                    </div>
+                    <div className="h-6 w-24 bg-gray-300 rounded-md animate-pulse"></div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <TooltipProvider>
-      <div className="space-y-4">
+      <div className="flex flex-col items-center space-y-6">
         {Object.entries(members).map(([family, familyMembers]) => (
-          <Card key={family} className="w-full sm:w-1/2 md:w-1/3">
+          <Card
+            key={family}
+            className="w-full max-w-2xl bg-white shadow-lg rounded-lg"
+          >
             <CardHeader>
-              <CardTitle>{family}</CardTitle>
+              <CardTitle className="text-lg font-semibold">{family}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -78,12 +113,13 @@ export default function ManageExisting() {
                         </TooltipContent>
                       </Tooltip>
                     </div>
+
                     <Button
                       onClick={() => copyToken(member)}
                       variant="outline"
                       size="sm"
                     >
-                      Copier Token
+                      Copier Message
                     </Button>
                   </div>
                 ))}

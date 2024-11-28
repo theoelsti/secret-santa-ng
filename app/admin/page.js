@@ -57,11 +57,6 @@ export default function AdminPanel() {
     setIsAuthenticated(false);
     setMode(null);
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (!isAuthenticated) {
     return (
       <div className="max-w-md mx-auto space-y-4">
@@ -82,29 +77,49 @@ export default function AdminPanel() {
 
   if (!mode) {
     return (
-      <div className="max-w-md mx-auto space-y-4">
-        <h1 className="text-2xl font-bold text-center">
-          Admin Panel - Secret Santa
-        </h1>
-        <Button onClick={() => setMode("create")} className="w-full">
-          Créer un nouveau Secret Santa
-        </Button>
-        <Button onClick={() => setMode("manage")} className="w-full">
-          Gérer le Secret Santa actuel
-        </Button>
-        <Button onClick={handleLogout} variant="outline" className="w-full">
-          Logout
-        </Button>
-      </div>
+      <>
+        <div className="flex justify-between items-center px-4 py-2 bg-gray-100 shadow-md mb-4">
+          <h1 className="text-2xl font-bold text-center flex-grow">
+            Admin Panel - Secret Santa
+          </h1>
+        </div>
+        <div className="max-w-md mx-auto space-y-4">
+          <Button onClick={() => setMode("create")} className="w-full">
+            Créer un nouveau Secret Santa
+          </Button>
+          <Button onClick={() => setMode("manage")} className="w-full">
+            Gérer le Secret Santa actuel
+          </Button>
+          <Button onClick={handleLogout} variant="outline" className="w-full">
+            Logout
+          </Button>
+        </div>
+      </>
     );
   }
 
   return (
-    <div>
-      <Button onClick={() => setMode(null)} className="mb-4">
-        Retour
-      </Button>
-      {mode === "create" ? <SecretSantaForm /> : <ManageExisting />}
+    <div className="mx-auto space-y-4">
+      {/* Header avec le bouton Retour */}
+      <div className="flex justify-between items-center px-4 py-2 bg-gray-100 shadow-md">
+        <Button
+          onClick={() => setMode(null)}
+          className="hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md shadow"
+        >
+          Retour
+        </Button>
+        <h1 className="text-2xl font-bold text-center flex-grow">
+          Admin Panel - Secret Santa
+        </h1>
+      </div>
+
+      {/* Contenu principal */}
+      <div className="flex justify-center items-center">
+        <div className="w-full max-w-lg">
+          {/* Affiche le formulaire ou la gestion */}
+          {mode === "create" ? <SecretSantaForm /> : <ManageExisting />}
+        </div>
+      </div>
     </div>
   );
 }
