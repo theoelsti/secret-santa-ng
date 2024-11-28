@@ -55,7 +55,7 @@ export async function POST(req) {
         { status: 403 }
       );
     }
-
+    await prisma.gift.deleteMany();
     await prisma.santaRelation.deleteMany();
     await prisma.member.deleteMany();
 
@@ -72,7 +72,6 @@ export async function POST(req) {
           data: {
             name: member.name,
             family: family.name,
-            lastSeen: new Date(),
             token: memberToken,
           },
         });
