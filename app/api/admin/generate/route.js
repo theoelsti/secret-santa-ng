@@ -47,14 +47,19 @@ function secretSanta(members) {
 }
 export async function POST(req) {
   try {
-    const { families, token } = await req.json();
+    const { families } = await req.json();
 
-    if (token !== "G67CCL47F2PAZALV5F6J") {
+    // Récupérer le cookie admin_session
+    const adminSession = req.cookies.get("admin_session")?.value;
+
+    // Vérifier que le cookie admin_session correspond à admin_token
+    if (adminSession !== process.env.ADMIN_TOKEN) {
       return NextResponse.json(
-        { ok: false, message: "Token invalide" },
+        { ok: false, message: "Session admin invalide" },
         { status: 403 }
       );
     }
+
     await prisma.gift.deleteMany();
     await prisma.santaRelation.deleteMany();
     await prisma.member.deleteMany();
