@@ -23,12 +23,19 @@ export async function POST(req) {
     );
   }
 
+  await prisma.member.update({
+    where: { id: member.id },
+    data: {
+      lastSeen: new Date(),
+    },
+  });
+
   const santaRelation = member.isSantaFor[0];
 
   return Response.json({
     ok: true,
     santa: member.name,
-    receiver: [santaRelation.receiver.name],
-    receiver_id: santaRelation.receiverId,
+    receiver: santaRelation ? santaRelation.receiver.name : null,
+    receiver_id: santaRelation ? santaRelation.receiverId : null,
   });
 }
