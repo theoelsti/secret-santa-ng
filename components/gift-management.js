@@ -74,11 +74,7 @@ export default function GiftManagement() {
     const token = getCookie("token");
 
     try {
-      const res = await fetch(`/api/receivers/gift/${receiverId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
-      });
+      const res = await fetch(`/api/receivers/gift/${receiverId}`);
 
       if (res.ok) {
         const data = await res.json();
