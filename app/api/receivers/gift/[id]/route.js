@@ -4,7 +4,8 @@ const prisma = new PrismaClient();
 
 export async function POST(req, { params }) {
   const { token } = await req.json();
-  const id = parseInt(await params.id);
+  const { id } = await params;
+  const userId = parseInt(id);
 
   const sender = await prisma.member.findUnique({
     where: { token },
@@ -17,7 +18,7 @@ export async function POST(req, { params }) {
     );
   }
 
-  if (sender.id === id) {
+  if (sender.id === userId) {
     return Response.json(
       {
         ok: false,
@@ -30,7 +31,7 @@ export async function POST(req, { params }) {
   const relation = await prisma.santaRelation.findFirst({
     where: {
       santaId: sender.id,
-      receiverId: id,
+      receiverId: userId,
     },
   });
 
@@ -45,7 +46,9 @@ export async function POST(req, { params }) {
   }
 
   const gifts = await prisma.gift.findMany({
-    where: { proposerId: id },
+    where: {
+      receiverId: userId,
+    },
     select: { gift: true },
   });
 

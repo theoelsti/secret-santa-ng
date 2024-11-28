@@ -59,6 +59,7 @@ export async function PUT(req) {
     data: {
       gift,
       proposerId: sender.id,
+      receiverId: parseInt(receiverId),
       timestamp: new Date(),
     },
   });

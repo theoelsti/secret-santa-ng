@@ -16,6 +16,8 @@ model Member {
   isSantaFor   SantaRelation[] @relation("santa")
   receivingFrom SantaRelation[] @relation("receiver")
   gifts        Gift[]
+
+  Gift Gift[] @relation("receiver")
 }
 
 model SantaRelation {
@@ -26,9 +28,11 @@ model SantaRelation {
 }
 
 model Gift {
-  id          Int      @id @default(autoincrement())
-  proposerId  Int
-  gift        String
-  timestamp   DateTime
-  proposer    Member   @relation(fields: [proposerId], references: [id])
+ id          Int      @id @default(autoincrement())
+ proposerId  Int
+ gift        String
+ timestamp   DateTime
+ proposer    Member   @relation(fields: [proposerId], references: [id])
+ receiverId  Int      
+ receiver    Member   @relation("receiver", fields: [receiverId], references: [id])
 }
