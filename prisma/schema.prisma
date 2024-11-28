@@ -11,7 +11,7 @@ model Member {
   id           Int            @id @default(autoincrement())
   name         String
   family       String
-  lastSeen     DateTime
+  lastSeen     DateTime?
   token        String         @unique
   isSantaFor   SantaRelation[] @relation("santa")
   receivingFrom SantaRelation[] @relation("receiver")
