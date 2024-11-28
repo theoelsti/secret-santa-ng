@@ -116,24 +116,55 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+#### With Docker
+
+1. Clone the repo
+
    ```sh
    git clone https://github.com/theoelsti/secret-santa-ng.git
    ```
-3. Install NPM packages
+
+2. Create the docker image
+
    ```sh
+   docker build .
+   ```
+
+3. Run the docker image
+
+```sh
+docker run <image_sha>
+```
+
+#### With npm
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/theoelsti/secret-santa-ng.git
+   ```
+2. Install NPM packages
+   ```sh
+   cd secret-santa-ng
    npm install
    ```
-4. Enter your API in `config.js`
+3. Edit the ADMIN_TOKEN in the example.env file and make it a .env file
    ```js
-   const API_KEY = "ENTER YOUR API";
+   ADMIN_TOKEN="Whatever you want"
+   mv example.env .env
    ```
-5. Change git remote url to avoid accidental pushes to base project
+4. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
+5. Run or build
+
+```
+npm run dev
+or if you want to run in production
+npm run build
+npm start
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
