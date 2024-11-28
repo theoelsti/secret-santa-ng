@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id           Int            @id @default(autoincrement())
+  name         String
+  family       String
+  lastSeen     DateTime
+  token        String
+  isSantaFor   SantaRelation[] @relation("santa")
+  receivingFrom SantaRelation[] @relation("receiver")
+  gifts        Gift[]
+}
+
+model SantaRelation {
+  receiverId Int      @id
+  santaId    Int      @unique
+  santa      Member   @relation("santa", fields: [santaId], references: [id])
+  receiver   Member   @relation("receiver", fields: [receiverId], references: [id])
+}
+
+model Gift {
+  id          Int      @id @default(autoincrement())
+  proposerId  Int
+  gift        String
+  timestamp   DateTime
+  proposer    Member   @relation(fields: [proposerId], references: [id])
+}
