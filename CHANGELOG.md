@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.1 - 2024/11/19
+
+### Added or changed
+
+- Fully handle vercel deployment
+- Switched from sqlite to postgres
+
 ## v1.0.0 - 2024/11/19
 
 ### Added or Changed

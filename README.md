@@ -162,15 +162,20 @@ docker run -p 3000:3000 \
   secret-santa-app
 ```
 
+The application will be available at `http://localhost:3000` for local development
+
 #### Using Vercel
+
+0. Get a Postgres server. You can use [Neon.tech](https://console.neon.tech)
 
 1. Fork the repository
 2. Connect to Vercel
-3. Import the project
-4. Add environment variables in Vercel dashboard
-5. Deploy!
+3. Add New -> Project
+4. Import the repository
+5. Add environment variables in Vercel dashboard
+6. Deploy!
 
-The application will be available at `http://localhost:3000` for local development or your deployment URL for production.
+The app url will be available on the dashboard.
 
 <!-- USAGE EXAMPLES -->
 
