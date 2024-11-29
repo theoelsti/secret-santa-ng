@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.0
+## v1.0.0 - 2024/11/19
 
 ### Added or Changed
 
@@ -14,7 +14,7 @@
 
 - `cookies()` awaiting error
 
-## v0.0.1
+## v0.0.1 - 2024/11/18
 
 ### Added or Changed
 
