@@ -32,6 +32,7 @@ export default function TokenInput() {
     };
 
     checkExistingToken();
+    // eslint-disable-next-line
   }, [searchParams]);
 
   const handleSubmit = async (tokenToSubmit = token) => {
