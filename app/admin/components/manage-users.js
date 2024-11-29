@@ -38,7 +38,7 @@ export default function ManageExisting() {
   };
 
   const copyToken = async (member, type) => {
-    const baseUrl = window.location.origin;
+    const baseUrl = `${window.location.origin}/?token=${member.token}`;
     const text =
       type === "token"
         ? member.token

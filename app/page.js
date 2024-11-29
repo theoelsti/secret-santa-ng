@@ -1,5 +1,7 @@
 import "@/app/style/xmas.css";
 import TokenInput from "@/components/token-input";
+import { Suspense } from "react";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF8F8]">
@@ -8,15 +10,14 @@ export default function Home() {
           <li key={i} />
         ))}
       </ul>
-
       <main className="flex flex-col items-center justify-center flex-grow">
         <h1 className="text-4xl font-bold text-center mb-8">
           Secret-Santa 2024
         </h1>
-
-        <TokenInput />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TokenInput />
+        </Suspense>
       </main>
-
       <footer className="fixed bottom-0 w-full h-[0.1vh] text-center text-black leading-[60px]">
         Made with 💝 by <strong>Théophile</strong>
       </footer>
