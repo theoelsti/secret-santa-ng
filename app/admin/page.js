@@ -59,19 +59,25 @@ export default function AdminPanel() {
   };
   if (!isAuthenticated) {
     return (
-      <div className="max-w-md mx-auto space-y-4">
-        <h1 className="text-2xl font-bold text-center">Admin Authentication</h1>
-        <input
-          type="password"
-          value={authToken}
-          onChange={(e) => setAuthToken(e.target.value)}
-          className="w-full p-2 border rounded"
-          placeholder="Enter admin token"
-        />
-        <Button onClick={handleAuth} className="w-full">
-          Login
-        </Button>
-      </div>
+      <>
+        <div className="flex justify-between items-center px-4 py-2 bg-gray-100 shadow-md mb-4">
+          <h1 className="text-2xl font-bold text-center flex-grow">
+            Admin Authentication - Secret Santa
+          </h1>
+        </div>
+        <div className="max-w-md mx-auto space-y-4">
+          <input
+            type="password"
+            value={authToken}
+            onChange={(e) => setAuthToken(e.target.value)}
+            className="w-full p-2 border rounded"
+            placeholder="Enter admin token"
+          />
+          <Button onClick={handleAuth} className="w-full">
+            Login
+          </Button>
+        </div>
+      </>
     );
   }
 

@@ -19,7 +19,8 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const adminSession = cookies().get("admin_session");
+  const u_cookies = await cookies();
+  const adminSession = u_cookies.get("admin_session");
 
   if (adminSession?.value === ADMIN_TOKEN) {
     return Response.json({ ok: true, authenticated: true });

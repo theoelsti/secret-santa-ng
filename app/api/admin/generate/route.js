@@ -59,10 +59,9 @@ export async function POST(req) {
         { status: 403 }
       );
     }
-
-    await prisma.gift.deleteMany();
     await prisma.santaRelation.deleteMany();
     await prisma.member.deleteMany();
+    await prisma.gift.deleteMany();
 
     const allMembers = [];
     const memberTokens = [];
