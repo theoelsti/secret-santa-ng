@@ -6,11 +6,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Check, Key, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
-
 export default function ManageExisting() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [copiedId, setCopiedId] = useState(null);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -36,9 +37,16 @@ export default function ManageExisting() {
     }, {});
   };
 
-  const copyToken = async (member) => {
-    const message = `👋 Bonsoir ${member.name}!\n🌐 Rend toi sur le site suivant : https://santa.example.com et découvre à qui tu dois offrir ton cadeau !\n🔑 Voici ton jeton d'authentification :\n${member.token}`;
-    await navigator.clipboard.writeText(message);
+  const copyToken = async (member, type) => {
+    const baseUrl = window.location.origin;
+    const text =
+      type === "token"
+        ? member.token
+        : `👋 Bonsoir ${member.name}!\n🌐 Rend toi sur le site suivant : ${baseUrl} et découvre à qui tu dois offrir ton cadeau !\n🔑 Voici ton jeton d'authentification :\n${member.token}`;
+
+    await navigator.clipboard.writeText(text);
+    setCopiedId(`${member.id}-${type}`);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   if (loading) {
@@ -113,13 +121,43 @@ export default function ManageExisting() {
                       </Tooltip>
                     </div>
 
-                    <Button
-                      onClick={() => copyToken(member)}
-                      variant="outline"
-                      size="sm"
-                    >
-                      Copier Message
-                    </Button>
+                    <div className="flex gap-2">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            onClick={() => copyToken(member, "token")}
+                            variant="outline"
+                            size="icon"
+                          >
+                            {copiedId === `${member.id}-token` ? (
+                              <Check className="h-4 w-4 text-green-500 animate-in zoom-in spin-in-90 duration-300" />
+                            ) : (
+                              <Key className="h-4 w-4" />
+                            )}
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Copier le token</TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            onClick={() => copyToken(member, "message")}
+                            variant="outline"
+                            size="icon"
+                          >
+                            {copiedId === `${member.id}-message` ? (
+                              <Check className="h-4 w-4 text-green-500 animate-in zoom-in spin-in-90 duration-300" />
+                            ) : (
+                              <Mail className="h-4 w-4" />
+                            )}
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          Copier le message complet
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
                   </div>
                 ))}
               </div>

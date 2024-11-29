@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getCookie } from "@/lib/cookies";
-import { Loader2 } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 export default function GiftManagement() {
@@ -212,7 +212,9 @@ export default function GiftManagement() {
             <Loader2 className="animate-spin" />
           </Button>
         ) : (
-          <Button onClick={handleSubmitGift}>Envoyer</Button>
+          <Button onClick={handleSubmitGift}>
+            <Send></Send>
+          </Button>
         )}
       </div>
     </div>
