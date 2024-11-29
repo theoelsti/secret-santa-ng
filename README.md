@@ -81,7 +81,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![User Dashboard Screenshot][product-screenshot]
 
 Secret Santa New Generation is a modern app that simplifies your Secret Santa organization. Here are the main features:
 
@@ -203,7 +203,7 @@ The application will be available at `http://localhost:3000` for local developme
    - Enter the gift in the input
    - Send it !
 
-![Gift List](images/gift-list.png)
+![Gift List](images/gifts.png)
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -275,7 +275,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+<!-- Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
 
 Project Link: [https://github.com/theoelsti/secret-santa-ng](https://github.com/theoelsti/secret-santa-ng)
 
@@ -306,7 +306,7 @@ Project Link: [https://github.com/theoelsti/secret-santa-ng](https://github.com/
 [license-url]: https://github.com/theoelsti/secret-santa-ng/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/dashboard.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Tailwind]: https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC
