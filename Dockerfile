@@ -9,8 +9,10 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
-# Generate Prisma client and build the application
-RUN npx prisma generate && npm run build
+# Generate Prisma client + .db and build the application
+RUN npx prisma generate && npx prisma db push
+
+RUN npm run build
 
 # Expose port 3000
 EXPOSE 3000
