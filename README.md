@@ -89,7 +89,6 @@ Secret Santa New Generation is a modern app that simplifies your Secret Santa or
 - 🎁 **Wishlist**: Each participant can create and manage their gift wishlist
 - 💡 **Gift suggestions**: Ability to suggest ideas for other participants
 - 📱 **Responsive interface**: Works on mobile, tablet, and desktop
-- 👥 **Multiple groups**: Manage different Secret Santa groups
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
