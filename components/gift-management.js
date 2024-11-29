@@ -156,6 +156,7 @@ export default function GiftManagement() {
               className="w-1/3 mx-auto mt-4"
               width={"20"}
               height={"20"}
+              unoptimized
             />
           </div>
         ) : (
