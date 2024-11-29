@@ -103,17 +103,15 @@ Secret Santa New Generation is a modern app that simplifies your Secret Santa or
 
 ## Getting Started
 
-To get started with this project, you can choose between Docker and NPM installation methods.
+This guide explains how to set up and deploy the application in different environments.
 
 ### Prerequisites
 
-- Node.js 18+ (for NPM installation)
-- Docker (for Docker installation)
+- Node.js 18+
 - Git
+- Docker (optional)
 
-### Installation
-
-#### With Docker (Recommended)
+### Local Development Setup
 
 1. Clone the repository
 
@@ -122,84 +120,58 @@ git clone https://github.com/theoelsti/secret-santa-ng.git
 cd secret-santa-ng
 ```
 
-2. Build and run with Docker
+2. Configure environment
+
+```sh
+# Copy example environment file
+cp example.env .env
+
+# Edit .env and set your variables
+ADMIN_TOKEN="your_admin_token"
+DATABASE_URL="file:./dev.db"
+```
+
+3. Install and run
+
+```sh
+# Install dependencies
+npm install
+
+# Initialize database
+npx prisma migrate dev
+
+# Run development server
+npm run dev
+# or
+# Build and run production
+npm run build
+npm start
+```
+
+### Production Deployment
+
+#### Using Docker (Recommended)
 
 ```sh
 # Build the Docker image
 docker build -t secret-santa-app .
 
 # Run the container
-docker run -p 3000:3000 secret-santa-app
+docker run -p 3000:3000 \
+  -e ADMIN_TOKEN="your_admin_token" \
+  -e DATABASE_URL="file:./prod.db" \
+  secret-santa-app
 ```
 
-The application will be available at `http://localhost:3000`
-
-#### With NPM
-
-1. Clone the repository
-
-```sh
-git clone https://github.com/theoelsti/secret-santa-ng.git
-cd secret-santa-ng
-```
-
-2. Install dependencies and setup environment
-
-```sh
-# Install dependencies
-npm install
-
-# Copy and configure environment variables
-cp example.env .env
-# Edit .env and set your ADMIN_TOKEN
-```
-
-3. Run the application
-
-```sh
-# For development
-npm run dev
-
-# For production
-npm run build
-npm start
-```
-
-The application will be available at `http://localhost:3000`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- DEPLOYMENT -->
-
-## Deployment
-
-### Deploy on Vercel
+#### Using Vercel
 
 1. Fork the repository
 2. Connect to Vercel
 3. Import the project
-4. Configure environment variables:
-   ```bash
-   ADMIN_TOKEN=xxx
-   DATABASE_URL=xxx
-   ```
+4. Add environment variables in Vercel dashboard
 5. Deploy!
 
-### Deploy with Docker
-
-```bash
-# Build with your variables
-docker build -t secret-santa-app \
-  --build-arg ADMIN_TOKEN=xxx \
-  --build-arg DATABASE_URL=xxx \
-  .
-
-# Run the container
-docker run -d \
-  -p 3000:3000 \
-  --name secret-santa \
-  secret-santa-app
-```
+The application will be available at `http://localhost:3000` for local development or your deployment URL for production.
 
 <!-- USAGE EXAMPLES -->
 
