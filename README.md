@@ -179,13 +179,13 @@ The application will be available at `http://localhost:3000` for local developme
 
 ### For administrators
 
-1. **Create a group**
+1. **Create a family**
 
    - Log in with your admin token
    - Click on "Create new group"
-   - Set the budget and deadline
+   - Create Families
 
-   ![Create Group](images/create-group.png)
+   ![Create Family](images/create-family.png)
 
 2. **Manage participants**
    - Add participants
@@ -195,14 +195,13 @@ The application will be available at `http://localhost:3000` for local developme
 
 1. **Getting started**
 
-   - Log in to your group
-   - Create your wishlist
-   - Set your preferences
+   - Log in to the dashboard
+   - See the person you're offering to
 
-2. **Managing your wishlist**
-   - Add gift ideas with links
-   - Set priorities
-   - Add comments to guide your Secret Santa
+2. **Giving ideas for gifts**
+   - Select a participant, can be you 1 time
+   - Enter the gift in the input
+   - Send it !
 
 ![Gift List](images/gift-list.png)
 
@@ -230,6 +229,9 @@ DATABASE_URL="your_database_url"
 - [ ] 🌐 Multi-language support (FR, EN)
 - [ ] 🔄 Integration with Amazon/Etsy for wishlists
 - [ ] 🎨 Dark Theme
+- [ ] 📊 Advanced admin features
+  - [ ] Add a deadline
+  - [ ] Set a budget
 
 See the [open issues](https://github.com/theoelsti/secret-santa-ng/issues) for a full list of proposed features (and known issues).
 
