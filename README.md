@@ -182,14 +182,19 @@ The application will be available at `http://localhost:3000` for local developme
 1. **Create a family**
 
    - Log in with your admin token
-   - Click on "Create new group"
-   - Create Families
+   - Click on "Ajouter une famille"
+   - Enter Family name
+   - Add members and add their name
+   - When done, click "Générer le Secret Santa"
 
    ![Create Family](images/create-family.png)
 
-2. **Manage participants**
-   - Add participants
-   - Monitor group status
+###### You wil be redirected on the users management page
+
+2. **Share the word**
+   - You can copy a message or the user token
+   - Send it 1 by 1 to every participants
+   - They will have an url that put the token in cookies directly
 
 ### For participants
 
