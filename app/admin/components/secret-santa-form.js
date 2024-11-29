@@ -3,9 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Gift, Plus, Trash2, UserPlus } from "lucide-react";
 import { useState } from "react";
-
-export default function SecretSantaForm() {
+export default function SecretSantaForm({ onSuccess }) {
   const [families, setFamilies] = useState([]);
   const [tokens, setTokens] = useState([]);
   const [showTokens, setShowTokens] = useState(false);
@@ -78,8 +79,7 @@ export default function SecretSantaForm() {
 
       const data = await res.json();
       if (res.ok) {
-        setTokens(data.tokens);
-        setShowTokens(true);
+        onSuccess?.();
       } else {
         alert(data.message || "Failed to generate Secret Santa");
       }
@@ -90,55 +90,44 @@ export default function SecretSantaForm() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold">Créer votre Secret Santa</h2>
-        <Button onClick={handleAddFamily}>Ajouter une famille</Button>
+    <div className="max-w-3xl mx-auto space-y-8">
+      <div className="text-center space-y-4">
+        <h2 className="text-3xl font-bold">Créer votre Secret Santa</h2>
+        <Button onClick={handleAddFamily}>
+          <Plus className="mr-2 h-4 w-4" />
+          Ajouter une famille
+        </Button>
       </div>
 
-      {families.length === 0 ? (
-        <p className="text-gray-600 text-center">
-          Pas encore de famille. Cliquez sur &quot;Ajouter une famille&quot;
-          pour commencer!
-        </p>
-      ) : (
-        families.map((family, familyIndex) => (
-          <Card key={family.id} className="bg-gray-50 shadow-md">
-            <CardHeader className="flex justify-between items-center">
-              <Input
-                placeholder="Nom de Famille"
-                value={family.name}
-                onChange={(e) =>
-                  handleUpdateFamilyName(familyIndex, e.target.value)
-                }
-                className="max-w-md"
-              />
-              <Button
-                variant="destructive"
-                onClick={() => handleRemoveFamily(familyIndex)}
-                size="sm"
-              >
-                Supprimer la famille
-              </Button>
+      <div className="space-y-6">
+        {families.map((family, familyIndex) => (
+          <Card key={family.id}>
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <Input
+                  placeholder="Nom de Famille"
+                  value={family.name}
+                  onChange={(e) =>
+                    handleUpdateFamilyName(familyIndex, e.target.value)
+                  }
+                  className="max-w-sm"
+                />
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => handleRemoveFamily(familyIndex)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </CardHeader>
-            <CardContent>
-              <Button
-                onClick={() => handleAddMember(familyIndex)}
-                size="sm"
-                className="mb-4"
-              >
-                Ajouter un membre
-              </Button>
-
-              {family.members.length === 0 ? (
-                <p className="text-gray-500">
-                  Pas encore de membre. Ajoutez-en un!
-                </p>
-              ) : (
-                family.members.map((member, memberIndex) => (
-                  <div key={member.id} className="flex items-center gap-4 mb-2">
+            <CardContent className="space-y-4">
+              <Separator className="my-4" />
+              <div className="space-y-3">
+                {family.members.map((member, memberIndex) => (
+                  <div key={member.id} className="flex items-center gap-2">
                     <Input
-                      placeholder="Prénom"
+                      placeholder="Prénom du membre"
                       value={member.name}
                       onChange={(e) =>
                         handleUpdateMemberName(
@@ -147,29 +136,39 @@ export default function SecretSantaForm() {
                           e.target.value
                         )
                       }
-                      className="flex-grow"
+                      className="flex-1"
                     />
                     <Button
                       variant="destructive"
+                      size="icon"
                       onClick={() =>
                         handleRemoveMember(familyIndex, memberIndex)
                       }
-                      size="sm"
                     >
-                      Supprimer
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
-                ))
-              )}
+                ))}
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleAddMember(familyIndex)}
+                className="w-full mt-2 border-dashed"
+              >
+                <UserPlus className="mr-2 h-4 w-4" />
+                Ajouter un membre
+              </Button>
             </CardContent>
           </Card>
-        ))
-      )}
+        ))}
+      </div>
 
       {families.length > 0 && (
-        <div className="flex justify-center">
-          <Button onClick={handleGenerateSecretSanta} className="mt-6">
-            Générer le secret santa
+        <div className="text-center pt-4">
+          <Button size="lg" onClick={handleGenerateSecretSanta}>
+            <Gift className="mr-2 h-5 w-5" />
+            Générer le Secret Santa
           </Button>
         </div>
       )}

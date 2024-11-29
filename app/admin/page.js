@@ -122,8 +122,11 @@ export default function AdminPanel() {
       {/* Contenu principal */}
       <div className="flex justify-center items-center">
         <div className="w-full max-w-lg">
-          {/* Affiche le formulaire ou la gestion */}
-          {mode === "create" ? <SecretSantaForm /> : <ManageExisting />}
+          {mode === "create" ? (
+            <SecretSantaForm onSuccess={() => setMode("manage")} />
+          ) : (
+            <ManageExisting />
+          )}
         </div>
       </div>
     </div>
