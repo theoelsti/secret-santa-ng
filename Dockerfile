@@ -2,15 +2,18 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# Copy package files first to leverage Docker cache
 COPY package*.json ./
+RUN npm install
 
-RUN npm i
-
+# Copy the rest of the application
 COPY . .
 
-RUN npx prisma generate
-RUN npm run build
+# Generate Prisma client and build the application
+RUN npx prisma generate && npm run build
 
+# Expose port 3000
 EXPOSE 3000
 
+# Start the application
 CMD ["npm", "start"]

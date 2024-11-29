@@ -83,111 +83,181 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-This project was originally made in my family to avoid that every year, someone had to draw the secret santa gifts and know everything.
+Secret Santa New Generation is a modern app that simplifies your Secret Santa organization. Here are the main features:
 
-Here's what I wanted:
-
-- That no one know who is offering to who
-- That people could provide ideas for others, so the secret santa have some leads
-
-I started the first year with a totally YOLO project, written only in html/javascript with a Python backend API, but I wanted it to be easily deployable/maintainable.
+- 🔒 **Secure draw**: No one, not even the admin, can know who gives to whom
+- 🎁 **Wishlist**: Each participant can create and manage their gift wishlist
+- 💡 **Gift suggestions**: Ability to suggest ideas for other participants
+- 📱 **Responsive interface**: Works on mobile, tablet, and desktop
+- 👥 **Multiple groups**: Manage different Secret Santa groups
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 - [![Next][Next.js]][Next-url]
+- [![Tailwind][Tailwind]][Tailwind-url]
+- [![Prisma][Prisma]][Prisma-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get started with this project, you can choose between Docker and NPM installation methods.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+- Node.js 18+ (for NPM installation)
+- Docker (for Docker installation)
+- Git
 
 ### Installation
 
-#### With Docker
+#### With Docker (Recommended)
 
-1. Clone the repo
-
-   ```sh
-   git clone https://github.com/theoelsti/secret-santa-ng.git
-   ```
-
-2. Create the docker image
-
-   ```sh
-   docker build .
-   ```
-
-3. Run the docker image
+1. Clone the repository
 
 ```sh
-docker run <image_sha>
+git clone https://github.com/theoelsti/secret-santa-ng.git
+cd secret-santa-ng
 ```
 
-#### With npm
+2. Build and run with Docker
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/theoelsti/secret-santa-ng.git
-   ```
-2. Install NPM packages
-   ```sh
-   cd secret-santa-ng
-   npm install
-   ```
-3. Edit the ADMIN_TOKEN in the example.env file and make it a .env file
-   ```js
-   ADMIN_TOKEN="Whatever you want"
-   mv example.env .env
-   ```
-4. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
-5. Run or build
+```sh
+# Build the Docker image
+docker build -t secret-santa-app .
 
+# Run the container
+docker run -p 3000:3000 secret-santa-app
 ```
+
+The application will be available at `http://localhost:3000`
+
+#### With NPM
+
+1. Clone the repository
+
+```sh
+git clone https://github.com/theoelsti/secret-santa-ng.git
+cd secret-santa-ng
+```
+
+2. Install dependencies and setup environment
+
+```sh
+# Install dependencies
+npm install
+
+# Copy and configure environment variables
+cp example.env .env
+# Edit .env and set your ADMIN_TOKEN
+```
+
+3. Run the application
+
+```sh
+# For development
 npm run dev
-or if you want to run in production
+
+# For production
 npm run build
 npm start
 ```
 
+The application will be available at `http://localhost:3000`
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- DEPLOYMENT -->
+
+## Deployment
+
+### Deploy on Vercel
+
+1. Fork the repository
+2. Connect to Vercel
+3. Import the project
+4. Configure environment variables:
+   ```bash
+   ADMIN_TOKEN=xxx
+   DATABASE_URL=xxx
+   ```
+5. Deploy!
+
+### Deploy with Docker
+
+```bash
+# Build with your variables
+docker build -t secret-santa-app \
+  --build-arg ADMIN_TOKEN=xxx \
+  --build-arg DATABASE_URL=xxx \
+  .
+
+# Run the container
+docker run -d \
+  -p 3000:3000 \
+  --name secret-santa \
+  secret-santa-app
+```
 
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### For administrators
+
+1. **Create a group**
+
+   - Log in with your admin token
+   - Click on "Create new group"
+   - Set the budget and deadline
+
+   ![Create Group](images/create-group.png)
+
+2. **Manage participants**
+   - Add participants
+   - Monitor group status
+
+### For participants
+
+1. **Getting started**
+
+   - Log in to your group
+   - Create your wishlist
+   - Set your preferences
+
+2. **Managing your wishlist**
+   - Add gift ideas with links
+   - Set priorities
+   - Add comments to guide your Secret Santa
+
+![Gift List](images/gift-list.png)
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- CONFIGURATION -->
+
+## Configuration
+
+### Environment Variables
+
+```env
+# Required
+ADMIN_TOKEN="your_admin_token"
+DATABASE_URL="your_database_url"
+```
+
 <!-- ROADMAP -->
 
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [ ] 📨 Email notifications
+- [ ] 🌐 Multi-language support (FR, EN)
+- [ ] 🔄 Integration with Amazon/Etsy for wishlists
+- [ ] 🎨 Dark Theme
 
 See the [open issues](https://github.com/theoelsti/secret-santa-ng/issues) for a full list of proposed features (and known issues).
 
@@ -207,6 +277,9 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+- 🐛 [Report a bug](https://github.com/theoelsti/secret-santa-ng/issues/new?labels=bug&template=bug-report---.md)
+- 💡 [Request a feature](https://github.com/theoelsti/secret-santa-ng/issues/new?labels=enhancement&template=feature-request---.md)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -262,6 +335,10 @@ Project Link: [https://github.com/theoelsti/secret-santa-ng](https://github.com/
 [product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+[Tailwind]: https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC
+[Tailwind-url]: https://tailwindcss.com/
+[Prisma]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
+[Prisma-url]: https://www.prisma.io/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
